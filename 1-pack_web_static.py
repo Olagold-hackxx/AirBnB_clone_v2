@@ -8,7 +8,7 @@ def do_pack():
     """Generates a .tgz archive"""
     local("mkdir -p versions")
     time = datetime.now()
-    path = "versions/web_static_{}{}{}{}{}{}.tgz".format(time.year,
+    path = "versions/web_static_{}{:02d}{:02d}{:02d}{:02d}{:02d}.tgz".format(time.year,
                                                          time.month, time.day,
                                                          time.hour,
                                                          time.minute,
