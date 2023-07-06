@@ -18,6 +18,6 @@ def do_pack():
         local("tar -cvzf {} web_static".format(path))
         size = os.stat(path).st_size
         print("web_static packed: {} -> {}Bytes".format(path, size))
-    except:
+    except Exception:
         return None
     return path
