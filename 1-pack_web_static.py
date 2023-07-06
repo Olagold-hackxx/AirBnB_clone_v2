@@ -14,9 +14,10 @@ def do_pack():
         .format(time.year, time.month, time.day, time.hour, time.minute,
                 time.second)
     print("Packing web_static to {}".format(path))
-    result = local("tar -cvzf {} web_static".format(path))
-    size = os.stat(path).st_size
-    print("web_static packed: {} -> {}Bytes".format(path, size))
-    if result.failed:
+    try:
+        result = local("tar -cvzf {} web_static".format(path))
+        size = os.stat(path).st_size
+        print("web_static packed: {} -> {} Bytes".format(path, size))
+    except:
         return None
     return path
