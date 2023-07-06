@@ -1,7 +1,27 @@
 #!/usr/bin/python3
-"""Deploy archive with fabric"""
-from fabric.api import env, run, put
+from fabric.api import *
+from datetime import datetime
 import os
+"""Generates a tar archive"""
+
+
+def do_pack():
+    """Generates a .tgz archive"""
+    if not os.path.isdir("versions"):
+        os.mkdir("versions")
+    time = datetime.now()
+    path = "versions/web_static_{}{:02d}{:02d}{:02d}{:02d}{:02d}.tgz"\
+        .format(time.year, time.month, time.day, time.hour, time.minute,
+                time.second)
+    try:
+        print("Packing web_static to {}".format(path))
+        local("tar -cvzf {} web_static".format(path))
+        size = os.stat(path).st_size
+        print("web_static packed: {} -> {}Bytes".format(path, size))
+    except Exception:
+        return None
+    return path
+
 
 env.hosts = ['18.233.67.176', '35.175.135.215']
 env.user = 'ubuntu'
@@ -30,3 +50,9 @@ def do_deploy(archive_path):
     except Exception:
         return False
 
+
+def deploy():
+    path = do_pack()
+    if path is None:
+        return False
+    return do_deploy(path)
