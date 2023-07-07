@@ -18,15 +18,16 @@ def do_clean(number=0):
     etc.
     """
     local_archives = sorted(os.listdir("versions"))
-    remote_archives = run("ls -tr /data/web_static/releases/*web_static*").split()
+    remote_archives = run("ls -1tr /data/web_static/releases/*web_static*")\
+        .split("\n")
     if int(number) == 0:
         number = 1
     for i in range(int(number)):
         local_archives.pop()
         remote_archives.pop()
-    for archive in local_archives:
-        with lcd("versions"):
-            local("rm {}".format(archive))
-    for archive in remote_archives:
-        with cd("/data/web_static/releases/"):
-            sudo("rm -rf {}".format(archive))
+    with lcd("versions"):
+        for archive in local_archives:
+            local("rm ./{}".format(archive))
+    with cd("/data/web_static/releases/"):
+        for archive in remote_archives:
+            run("rm -rf ./{}".format(archive))
