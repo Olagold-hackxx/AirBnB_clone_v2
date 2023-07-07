@@ -17,14 +17,14 @@ def do_deploy(archive_path):
         put("{}".format(archive_path), "/tmp/")
         sudo("mkdir -p /data/web_static/releases/{}".format(path))
         sudo("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
-            .format(path_tgz, path))
+             .format(path_tgz, path))
         sudo("rm -rf /tmp/{}".format(path_tgz))
         sudo("mv /data/web_static/releases/{}/web_static/*\
             /data/web_static/releases/{}/".format(path, path))
         sudo("rm -rf /data/web_static/releases/{}/web_static".format(path))
         sudo("rm -rf /data/web_static/current")
         sudo("ln -s /data/web_static/releases/{}/ /data/web_static/current"
-            .format(path))
+             .format(path))
         print("New version deployed!")
         return True
     except Exception:

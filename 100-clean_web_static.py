@@ -21,4 +21,4 @@ def do_clean(number=0):
             local("rm {}".format(archive))
     for archive in remote_archives:
         with cd("/data/web_static/releases/"):
-            run("rm -rf {}".format(archive))
+            sudo("rm -rf {}".format(archive))
