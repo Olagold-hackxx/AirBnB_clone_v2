@@ -11,7 +11,7 @@ def do_clean(number=0):
     """Delete old versions of archives"""
     local_archives = sorted(os.listdir("versions"))
     remote_archives = run("ls /data/web_static/releases/*web_static*").split()
-    if number == 0:
+    if int(number) == 0:
         number = 1
     for i in range(int(number)):
         local_archives.pop()
