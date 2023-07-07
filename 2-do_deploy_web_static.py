@@ -8,7 +8,14 @@ env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
-    """Deploy archive with fabric to server"""
+    """Distributes an archive to a web server.
+
+    Args:
+        archive_path (str): The path of the archive to distribute.
+    Returns:
+        If the file doesn't exist at archive_path or an error occurs - False.
+        Otherwise - True.
+    """
     if not os.path.exists(archive_path):
         return False
     path = "{}".format(archive_path[9:-4])

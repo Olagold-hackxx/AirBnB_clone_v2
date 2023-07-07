@@ -8,9 +8,17 @@ env.user = 'ubuntu'
 
 
 def do_clean(number=0):
-    """Delete old versions of archives"""
+    """Delete out-of-date archives.
+
+    Args:
+        number (int): The number of archives to keep.
+
+    If number is 0 or 1, keeps only the most recent archive. If
+    number is 2, keeps the most and second-most recent archives,
+    etc.
+    """
     local_archives = sorted(os.listdir("versions"))
-    remote_archives = run("ls /data/web_static/releases/*web_static*").split()
+    remote_archives = run("ls -tr /data/web_static/releases/*web_static*").split()
     if int(number) == 0:
         number = 1
     for i in range(int(number)):
