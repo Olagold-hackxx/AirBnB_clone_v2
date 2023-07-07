@@ -17,15 +17,17 @@ def do_clean(number=0):
     number is 2, keeps the most and second-most recent archives,
     etc.
     """
-    number = 1 if int(number) == 0 else int(number)
-
-    archives = sorted(os.listdir("versions"))
-    [archives.pop() for i in range(number)]
+    local_archives = sorted(os.listdir("versions"))
+    remote_archives = run("ls -1tr /data/web_static/releases/*web_static*")\
+        .split("\n")
+    if int(number) == 0:
+        number = 1
+    for i in range(int(number)):
+        local_archives.pop()
+        remote_archives.pop()
     with lcd("versions"):
-        [local("rm ./{}".format(a)) for a in archives]
-
-    with cd("/data/web_static/releases"):
-        archives = run("ls -tr").split()
-        archives = [a for a in archives if "web_static_" in a]
-        [archives.pop() for i in range(number)]
-        [run("rm -rf ./{}".format(a)) for a in archives]
+        for archive in local_archives:
+            local("rm ./{}".format(archive))
+    with cd("/data/web_static/releases/"):
+        for archive in remote_archives:
+            run("rm -rf ./{}".format(archive))
