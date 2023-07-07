@@ -3,12 +3,21 @@ from fabric.api import *
 import os
 """Generates a tar archive"""
 
+env.hosts = ['18.233.67.176', '35.175.135.215']
+env.user = 'ubuntu'
+
+
 def do_clean(number=0):
-    archives = sorted(os.listdir("versions"))
+    local_archives = sorted(os.listdir("versions"))
+    remote_archives = run("ls /data/web_static/releases/*web_static*").split()
     if number == 0:
         number = 1
-    for archive in archives[:-{}.format(number)]:
+    for i in range(int(number)):
+        local_archives.pop()
+        remote_archives.pop()
+    for archive in local_archives:
         with lcd("versions"):
-            local("rm ./{}".format(archive))
-        with cd("/data/web_static/releases")
-            run("rm ./{}".format(archive))
+            local("rm {}".format(archive))
+    for archive in remote_archives:
+        with cd("/data/web_static/releases/"):
+            run("rm -rf {}".format(archive))
