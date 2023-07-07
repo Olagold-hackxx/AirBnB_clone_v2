@@ -35,16 +35,16 @@ def do_deploy(archive_path):
     path_tgz = "{}".format(archive_path[9:])
     try:
         put("{}".format(archive_path), "/tmp/")
-        sudo("mkdir -p /data/web_static/releases/{}".format(path))
-        sudo("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
-             .format(path_tgz, path))
+        run("mkdir -p /data/web_static/releases/{}".format(path))
+        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
+            .format(path_tgz, path))
         sudo("rm -rf /tmp/{}".format(path_tgz))
-        sudo("mv /data/web_static/releases/{}/web_static/*\
+        run("mv /data/web_static/releases/{}/web_static/*\
             /data/web_static/releases/{}/".format(path, path))
         sudo("rm -rf /data/web_static/releases/{}/web_static".format(path))
         sudo("rm -rf /data/web_static/current")
-        sudo("ln -s /data/web_static/releases/{}/ /data/web_static/current"
-             .format(path))
+        run("ln -s /data/web_static/releases/{}/ /data/web_static/current"
+            .format(path))
         print("New version deployed!")
         return True
     except Exception:
