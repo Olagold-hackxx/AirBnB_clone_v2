@@ -1,4 +1,4 @@
-#Set server
+# Set server
 exec {'Setup_server':
     provider => 'shell',
     command  => 'sudo apt-get -y update
