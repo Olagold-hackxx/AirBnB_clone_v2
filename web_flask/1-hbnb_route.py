@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-from flask import Flask
 """
 Start a flak web app
 """
+from flask import Flask
 
 app = Flask(__name__)
 app.strict_slashes = False
