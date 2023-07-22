@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Start a flak web app
 """
-from flask import Flask, render_template
+from flask import Flask
 from markupsafe import escape
 
 app = Flask(__name__)
@@ -27,13 +27,6 @@ def c_is_fun(input):
     """route to c/
     """
     return f"C {escape(input.replace('_', ' '))}"
-
-
-@app.errorhandler(404)
-def not_found(error=None):
-    """404 error handler
-    """
-    return render_template("error.html")
 
 
 if __name__ == "__main__":
