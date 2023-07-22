@@ -1,5 +1,7 @@
+#!/usr/bin/python3
 from flask import Flask, render_template
 from markupsafe import escape
+"""Start a flak web app"""
 
 app = Flask(__name__)
 
