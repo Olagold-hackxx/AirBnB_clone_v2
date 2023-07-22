@@ -1,32 +1,38 @@
 #!/usr/bin/python3
 from flask import Flask, render_template
 from markupsafe import escape
-"""Start a flak web app"""
+"""Start a flak web app
+"""
 
 app = Flask(__name__)
+app.strict_slashes = False
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def hello():
-    """route to root"""
+    """route to root
+    """
     return "Hello HBNB!"
 
 
-@app.route('/hbnb', strict_slashes=False)
+@app.route('/hbnb')
 def hbnb():
-    """route to /hbnb"""
+    """route to hbnb
+    """
     return "HBNB"
 
 
 @app.route('/c/<input>')
 def c_is_fun(input):
-    """route to c/"""
+    """route to c/
+    """
     return f"C {escape(input.replace('_', ' '))}"
 
 
 @app.errorhandler(404)
 def not_found(error=None):
-    """404 error handler"""
+    """404 error handler
+    """
     return render_template("error.html")
 
 

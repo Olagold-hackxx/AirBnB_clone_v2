@@ -1,19 +1,25 @@
 #!/usr/bin/python3
 from flask import Flask
-"""Start a flak web app"""
+"""
+Start a flak web app
+"""
 
 app = Flask(__name__)
+app.strict_slashes = False
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def hello():
-    """route to root"""
+    """route to root
+    """
     return "Hello HBNB!"
 
 
-@app.route('/hbnb', strict_slashes=False)
+@app.route('/hbnb')
 def hbnb():
-    """route to hbnb"""
+    """route to
+    hbnb
+    """
     return "HBNB"
 
 
