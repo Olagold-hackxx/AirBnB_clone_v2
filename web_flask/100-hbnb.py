@@ -21,8 +21,7 @@ def state():
     states = storage.all('State').values()
     amenities = storage.all('Amenity').values()
     places = storage.all('Place').values()
-    cities = storage.all('City').values()
-    return render_template('100-hbnb.html', data=[states, amenities, places, cities])
+    return render_template('100-hbnb.html', data=[states, amenities, places])
 
 
 if __name__ == "__main__":
