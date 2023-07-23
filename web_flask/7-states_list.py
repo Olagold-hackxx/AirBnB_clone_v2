@@ -12,12 +12,14 @@ app.strict_slashes = False
 
 @app.route('/states_list')
 def state_list():
+    """Get state list"""
     data = storage.all('State')
     return render_template('7-states_list.html', states=data)
 
 
 @app.teardown_appcontext
 def session_close(close):
+    """Close db session"""
     storage.close()
 
 
