@@ -1,42 +1,34 @@
 #!/usr/bin/python3
-"""Starts a Flask web application.
-
-The application listens on 0.0.0.0, port 5000.
-Routes:
-    /states: HTML page with a list of all State objects.
-    /states/<id>: HTML page displaying the given state with <id>.
+"""Start a flak web app
 """
+from flask import Flask, render_template
+from markupsafe import escape
 from models import storage
-from flask import Flask
-from flask import render_template
+from models import State
 
 app = Flask(__name__)
+app.strict_slashes = False
 
 
-@app.route("/states", strict_slashes=False)
-def states():
-    """Displays an HTML page with a list of all States.
-
-    States are sorted by name.
-    """
-    states = storage.all("State")
-    return render_template("9-states.html", states=states)
+@app.teardown_appcontext
+def session_close(close):
+    storage.close()
 
 
-@app.route("/states/<id>", strict_slashes=False)
-def states_id(id):
-    """Displays an HTML page with info about <id>, if it exists."""
-    for state in storage.all("State").values():
+@app.route('/states')
+def state():
+    data = storage.all('State')
+    return render_template('9-states.html', states=data)
+
+
+@app.route('/states/<id>')
+def state_id(id):
+    data = storage.all('State').values()
+    for state in data:
         if state.id == id:
             return render_template("9-states.html", states=state)
     return render_template("9-states.html")
 
 
-@app.teardown_appcontext
-def teardown(exc):
-    """Remove the current SQLAlchemy session."""
-    storage.close()
-
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5000)
