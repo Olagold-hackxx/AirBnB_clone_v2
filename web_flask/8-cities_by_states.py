@@ -12,6 +12,12 @@ app.strict_slashes = False
 data = storage.all('State').values()
 
 
+@app.teardown_appcontext
+def session_close(close):
+    """Close db session"""
+    storage.close()
+
+
 @app.route('/states_list')
 def state_list():
     """Get state list"""
@@ -24,11 +30,8 @@ def city_list():
     return render_template('8-cities_by_states.html', states=data)
 
 
-@app.teardown_appcontext
-def session_close(close):
-    """Close db session"""
-    storage.close()
+
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000)

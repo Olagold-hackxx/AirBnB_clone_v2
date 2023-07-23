@@ -10,16 +10,16 @@ app.strict_slashes = False
 data = storage.all('State').values()
 
 
+@app.teardown_appcontext
+def session_close(close=None):
+    """Close db session"""
+    storage.close()
+
 @app.route('/states_list')
 def state_list():
     """Get state list"""
     return render_template('7-states_list.html', states=data)
 
-
-@app.teardown_appcontext
-def session_close(close=None):
-    """Close db session"""
-    storage.close()
 
 
 if __name__ == "__main__":
