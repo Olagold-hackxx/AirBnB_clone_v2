@@ -12,9 +12,10 @@
 			{%endfor%}
 		</UL>
 		{% else %}
+		{% set ns = namespace(found=0)%}
 		{% for state in states[0]%}
 		{% if states[1] == state.id%}
-		{% set found = 1%}
+			{% set ns.found = 1%}
 		<H1>States: {{state.name}}</H1>
 		<H3>Cities: <H3>
 		<UL>
@@ -24,9 +25,9 @@
 		</UL>
 		{% endif%}
 		{% endfor %}
-		{%if found != 1%}
+		{%if ns.found != 1%}
 		<H1> Not found! <H1>
-			{% endif %}
 		{%endif%}
+		{% endif %}
     </BODY>
 </HTML>
