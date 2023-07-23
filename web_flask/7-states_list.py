@@ -15,12 +15,12 @@ def session_close(close=None):
     """Close db session"""
     storage.close()
 
+
 @app.route('/states_list')
 def state_list():
     """Get state list"""
     return render_template('7-states_list.html', states=data)
 
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port="5000")

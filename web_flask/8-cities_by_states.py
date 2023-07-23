@@ -30,8 +30,5 @@ def city_list():
     return render_template('8-cities_by_states.html', states=data)
 
 
-
-
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

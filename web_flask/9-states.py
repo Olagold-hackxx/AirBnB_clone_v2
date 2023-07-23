@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.strict_slashes = False
 data = storage.all('State').values()
 
+
 @app.teardown_appcontext
 def session_close(close):
     storage.close()
@@ -24,7 +25,6 @@ def state():
 @app.route('/states/<id>')
 def state_id(id):
     return render_template('9-states.html', states=[data, id])
-
 
 
 if __name__ == "__main__":

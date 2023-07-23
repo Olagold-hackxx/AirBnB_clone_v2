@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <HTML lang="en">
     <HEAD>
-        	<TITLE>HBNB</TITLE>
+        <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-		{% if not states[1] %}
-		<H1>States</H1>
+	{% if not states[1] %}
+	<H1>States</H1>
         <UL>
-			{%for state in states|sort(attribute='name')%}
-			<LI>{{state.id}}: <B>{{state.name}}</B></LI>
-			{%endfor%}
-		</UL>
-		{% else %}
-		{% set ns = namespace(found=0)%}
-		{% for state in states[0]%}
-		{% if states[1] == state.id%}
-			{% set ns.found = 1%}
-		<H1>States: {{state.name}}</H1>
-		<H3>Cities: <H3>
-		<UL>
-			{%for city in state.cities|sort(attribute='name')%}
-			<LI>{{city.id}}: <B>{{city.name}}</B></LI>
-			{%endfor%}
-		</UL>
-		{% endif%}
-		{% endfor %}
-		{%if ns.found != 1%}
-		<H1> Not found! <H1>
-		{%endif%}
-		{% endif %}
+		{%for state in states|sort(attribute='name')%}
+		<LI>{{state.id}}: <B>{{state.name}}</B></LI>
+		{%endfor%}
+	</UL>
+	{% else %}
+	{% set ns = namespace(found=0)%}
+	{% for state in states[0]%}
+	{% if states[1] == state.id%}
+	{% set ns.found = 1%}
+	<H1>States: {{state.name}}</H1>
+	<H3>Cities: <H3>
+	<UL>
+		{%for city in state.cities|sort(attribute='name')%}
+		<LI>{{city.id}}: <B>{{city.name}}</B></LI>
+		{%endfor%}
+	</UL>
+	{% endif%}
+	{% endfor %}
+	{%if ns.found != 1%}
+	<H1> Not found! <H1>
+	{%endif%}
+	{% endif %}
     </BODY>
 </HTML>
