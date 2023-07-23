@@ -9,7 +9,6 @@ from models import State
 
 app = Flask(__name__)
 app.strict_slashes = False
-data = storage.all('State').values()
 
 
 @app.teardown_appcontext
@@ -21,12 +20,14 @@ def session_close(close):
 @app.route('/states_list')
 def state_list():
     """Get state list"""
+    data = storage.all('State').values()
     return render_template('7-states_list.html', states=data)
 
 
 @app.route('/cities_by_states')
 def city_list():
     """Get city lists"""
+    data = storage.all('State').values()
     return render_template('8-cities_by_states.html', states=data)
 
 

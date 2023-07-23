@@ -9,7 +9,6 @@ from models import State
 
 app = Flask(__name__)
 app.strict_slashes = False
-data = storage.all('State').values()
 
 
 @app.teardown_appcontext
@@ -19,11 +18,13 @@ def session_close(close):
 
 @app.route('/states')
 def state():
+    data = storage.all('State').values()
     return render_template('9-states.html', states=data)
 
 
 @app.route('/states/<id>')
 def state_id(id):
+    data = storage.all('State').values()
     return render_template('9-states.html', states=[data, id])
 
 
