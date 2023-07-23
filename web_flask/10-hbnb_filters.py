@@ -9,8 +9,6 @@ from models import State
 
 app = Flask(__name__)
 app.strict_slashes = False
-states = storage.all('State').values()
-amenities = storage.all('Amenity').values()
 
 
 @app.teardown_appcontext
@@ -20,6 +18,8 @@ def session_close(close):
 
 @app.route('/hbnb_filters')
 def state():
+    states = storage.all('State').values()
+    amenities = storage.all('Amenity').values()
     return render_template('10-hbnb_filters.html', data=[states, amenities])
 
 
