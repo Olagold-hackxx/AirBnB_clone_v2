@@ -8,12 +8,12 @@ from models import storage
 
 app = Flask(__name__)
 app.strict_slashes = False
+data = storage.all('State').values()
 
 
 @app.route('/states_list')
 def state_list():
     """Get state list"""
-    data = storage.all('State')
     return render_template('7-states_list.html', states=data)
 
 

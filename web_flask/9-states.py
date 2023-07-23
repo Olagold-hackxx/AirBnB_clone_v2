@@ -8,17 +8,17 @@ from models import storage
 
 app = Flask(__name__)
 app.strict_slashes = False
-data = storage.all('State')
+data = storage.all('State').values()
 
 
-@app.route('/states_list')
-def state_list():
-    return render_template('7-states_list.html', states=data)
+@app.route('/states')
+def state():
+    return render_template('9-states.html', states=data)
 
 
-@app.route('/cities_by_states')
-def city_list():
-    return render_template('8-cities_by_states.html', states=data)
+@app.route('/states/<id>')
+def state_id(id):
+    return render_template('9-states.html', states=[data, id])
 
 
 @app.teardown_appcontext
