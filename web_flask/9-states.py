@@ -4,7 +4,6 @@
 from flask import Flask, render_template
 from markupsafe import escape
 from models import storage
-from models import State
 
 app = Flask(__name__)
 app.strict_slashes = False
