@@ -5,11 +5,11 @@
 
 		<link rel="shortcut icon" href="images/icon.ico" >
 
-		<link rel="stylesheet" href="../static/styles/4-common.css"/>
-		<link rel="stylesheet" href="../static/styles/3-header.css"/>
-		<link rel="stylesheet" href="../static/styles/3-footer.css"/>
-		<link rel="stylesheet" href="../static/styles/6-filters.css"/>
-		<link rel="stylesheet" href="../static/styles/8-places.css"/>
+		<link rel="stylesheet" href="../static/styles/103-common.css"/>
+		<link rel="stylesheet" href="../static/styles/103-header.css"/>
+		<link rel="stylesheet" href="../static/styles/103-footer.css"/>
+		<link rel="stylesheet" href="../static/styles/103-filters.css"/>
+		<link rel="stylesheet" href="../static/styles/103-places.css"/>
 	</head>
     <body>
 		<header>
@@ -20,7 +20,7 @@
 				<button>Search</button>
 				<div class="locations">
 					<h3>States</h3>
-					<h4>&nsbp;</h4>
+					<h4>&nbsp;</h4>
 					<ul class="popover">
 						{% for state in data[0]|sort(attribute='name') %}
 						<li><h2>{{state.name}}</h2>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="amenities">
 					<h3>Amenities</h3>
-					<h4>&nsbp;</h4>
+					<h4>&nbsp;</h4>
 					<ul class="popover">
 						{% for amenity in data[1]|sort(attribute='name') %}
 						<li><h4>{{ amenity.name }}</h4></li>
@@ -48,8 +48,8 @@
 				{% for place in data[2]|sort(attribute='name') %}
 				<article>
 					<div class="headline">
-						<h2>{{place.name}}</h2>
-						<div class="price_by_night">{{place.price_by_night}}</div>
+						<h2 class="name">{{place.name}}</h2>
+						<div class="price_by_night">&#36;{{place.price_by_night}}</div>
 					</div>
 					<div class="information">
 						<div class="max_guest">
@@ -67,7 +67,7 @@
 					</div>
 					<div class="user"><b>Owner</b>: {{place.user.first_name}} {{place.user.last_name}}</div>
 					<div class="description">
-						{{place.description}}
+						{{place.description|safe}}
                     </div>
 				</article>
 				{%endfor%}
